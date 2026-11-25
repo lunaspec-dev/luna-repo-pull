@@ -144,6 +144,14 @@ if [ "$repo_owner" == "$active_account" ]; then
     fi
 
     echo "Repository cloned successfully to $clone_path/$repo_name"
+    
+    # ===== SETUP WORK ENVIRONMENT =====
+    if [ "$create_dev_folder" = true ]; then
+        mkdir -p "$clone_path/dev"
+        echo "Created dev directory in $clone_path"
+    fi
+    
+    echo "Clone completed successfully for $repo_name."
 
 # ==== Fork and Clone for Others' Repo =====
 else
@@ -170,14 +178,13 @@ else
     fi
 
     echo "Repository forked and cloned successfully to $clone_path/$repo_name"
+    
+    # ===== SETUP WORK ENVIRONMENT =====
+    if [ "$create_dev_folder" = true ]; then
+        mkdir -p "$clone_path/dev"
+        echo "Created dev directory in $clone_path"
+    fi
+    
+    echo "Fork and clone completed successfully for $repo_name."
 fi
-
-# ===== SETUP WORK ENVIRONMENT =====
-# Create dev folder for experimentation
-if [ "$create_dev_folder" = true ]; then
-    mkdir -p "$clone_path/dev"
-    echo "Created dev directory in $clone_path"
-fi
-
-echo "repo fork/clone process completed successfully for $repo_name."
 echo "cd \"$clone_path/$repo_name\" to start working on your repo."
